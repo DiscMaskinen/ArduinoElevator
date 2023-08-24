@@ -10,8 +10,7 @@ configurePin(a,'D5','DigitalInput')
 configurePin(a,'D6','DigitalInput')
 configurePin(a,'D7','DigitalOutput')
 configurePin(a,'D8','DigitalOutput')
-s = servo(a, 'D9', 'MinPulseDuration', 900.*10^−6, 'MaxPulseDuration',
-  2100.*10^−6);
+s = servo(a, 'D9', 'MinPulseDuration', 900.*10^−6, 'MaxPulseDuration', 2100.*10^−6);
 knapp5 = 0;
 knapp4 = 0;
 knapp3 = 0;
@@ -26,119 +25,119 @@ A1 = readVoltage(a,'A1');
 A2 = readVoltage(a,'A2');
 A3 = readVoltage(a,'A3');
 while A3 < 4.1
-writePosition(s,0.6);
-A3 = readVoltage(a,'A3');
-writeDigitalPin(a,'D7',1)
-writeDigitalPin(a,'D8',0)
+  writePosition(s,0.6);
+  A3 = readVoltage(a,'A3');
+  writeDigitalPin(a,'D7',1)
+  writeDigitalPin(a,'D8',0)
 end
 writePosition(s,0.46)
 while (1)
-writePosition(s,0.46)
-while knapp3 == 0 && knapp2 == 0 && knapp1 == 0 && knapp4 == 0 && knapp5
-== 0
-knapp5 = readDigitalPin(a,'D6');
-knapp4 = readDigitalPin(a,'D5');
-knapp3 = readDigitalPin(a,'D4');
-knapp2 = readDigitalPin(a,'D3');
-knapp1 = readDigitalPin(a,'D2');
-end
-while knapp4==1 && A3<3.9
-knapp4 = readDigitalPin(a,'D5');
-writePosition(s,0.6);
-writeDigitalPin(a,'D7',1);
-writeDigitalPin(a,'D8',0);
-A1 = readVoltage(a,'A1');
-A2 = readVoltage(a,'A2');
-A3 = readVoltage(a,'A3');
-if A1 > 3.2
-vaning = 1;
-elseif A2 > 3
-vaning = 2;
-elseif A3 > 3
-vaning = 3;
-end
-end
-while knapp5==1 && A1<3.9
-knapp5 = readDigitalPin(a,'D6');
-writePosition(s,0.3);
-writeDigitalPin(a,'D7',1);
-writeDigitalPin(a,'D8',0);
-A1 = readVoltage(a,'A1');
-A2 = readVoltage(a,'A2');
-A3 = readVoltage(a,'A3');
-if A1 > 3.2
-vaning = 1;
-elseif A2 > 3
-vaning = 2;
-elseif A3 > 3
-vaning = 3;
-end
-end
-writePosition(s,0.46);
-writeDigitalPin(a,'D7',0);
-writeDigitalPin(a,'D8',1);
-A1 = readVoltage(a,'A1');
-A2 = readVoltage(a,'A2');
-A3 = readVoltage(a,'A3');
-if knapp1 == 1 && vaning ~= 1 %f rsta v ningen
-while A1 < 3.9
-A1 = readVoltage(a,'A1');
-if vaning ~= 1
-A2 = readVoltage(a,'A2');
-A3 = readVoltage(a,'A3');
-writeDigitalPin(a,'D7',1);
-writeDigitalPin(a,'D8',0);
-for gas = linspace(0.1,1)
-while acc < 0.16
-acc=acc+gas./(A2+A3);
-writePosition(s,0.46−acc)
-end
-end
-pause(0.02);
-A1 = readVoltage(a,'A1');
-end
-if A1 > 2.6
-writePosition(s,0.42)
-end
-end
-writeDigitalPin(a,'D7',0);
-writeDigitalPin(a,'D8',1);
-writePosition(s,0.46)
-vaning = 1;
-disp('F rsta V ningen')
-acc=0;
-knapp3 = 0;
-knapp2 = 0;
-knapp1 = 0;
-knapp4 = 0;
-knapp5 = 0;
-end
-if knapp2 == 1 && vaning ~= 2 %f rsta v ningen
-readVoltage(a,'A2')
-while A2 < 3.1
-A2 = readVoltage(a,'A2');
-if vaning == 3 || vaning == 0
-A1 = readVoltage(a,'A1');
-A3 = readVoltage(a,'A3');
-writeDigitalPin(a,'D7',1);
-writeDigitalPin(a,'D8',0);
-for gas = linspace(0.1,1)
-while acc < 0.16
-acc=acc+gas./(A1+A3);
-writePosition(s,0.46−acc)
-end
-end
-A2 = readVoltage(a,'A2');
-if A2 > 2.5
-writePosition(s,0.42)
-end
-elseif vaning == 1
-A1 = readVoltage(a,'A1');
-A3 = readVoltage(a,'A3');
-writeDigitalPin(a,'D7',1);
-writeDigitalPin(a,'D8',0);
-for gas = linspace(0.1,1)
-while acc < 0.16
+  writePosition(s,0.46)
+  while knapp3 == 0 && knapp2 == 0 && knapp1 == 0 && knapp4 == 0 && knapp5 == 0
+    knapp5 = readDigitalPin(a,'D6');
+    knapp4 = readDigitalPin(a,'D5');
+    knapp3 = readDigitalPin(a,'D4');
+    knapp2 = readDigitalPin(a,'D3');
+    knapp1 = readDigitalPin(a,'D2');
+  end
+  while knapp4==1 && A3<3.9
+    knapp4 = readDigitalPin(a,'D5');
+    writePosition(s,0.6);
+    writeDigitalPin(a,'D7',1);
+    writeDigitalPin(a,'D8',0);
+    A1 = readVoltage(a,'A1');
+    A2 = readVoltage(a,'A2');
+    A3 = readVoltage(a,'A3');
+    if A1 > 3.2
+      vaning = 1;
+    elseif A2 > 3
+      vaning = 2;
+    elseif A3 > 3
+      vaning = 3;
+    end
+  end
+  while knapp5==1 && A1<3.9
+    knapp5 = readDigitalPin(a,'D6');
+    writePosition(s,0.3);
+    writeDigitalPin(a,'D7',1);
+    writeDigitalPin(a,'D8',0);
+    A1 = readVoltage(a,'A1');
+    A2 = readVoltage(a,'A2');
+    A3 = readVoltage(a,'A3');
+    if A1 > 3.2
+      vaning = 1;
+    elseif A2 > 3
+      vaning = 2;
+    elseif A3 > 3
+      vaning = 3;
+    end
+  end
+  writePosition(s,0.46);
+  writeDigitalPin(a,'D7',0);
+  writeDigitalPin(a,'D8',1);
+  A1 = readVoltage(a,'A1');
+  A2 = readVoltage(a,'A2');
+  A3 = readVoltage(a,'A3');
+  if knapp1 == 1 && vaning ~= 1 %f rsta v ningen
+    while A1 < 3.9
+      A1 = readVoltage(a,'A1');
+      if vaning ~= 1
+        A2 = readVoltage(a,'A2');
+        A3 = readVoltage(a,'A3');
+        writeDigitalPin(a,'D7',1);
+        writeDigitalPin(a,'D8',0);
+        for gas = linspace(0.1,1)
+          while acc < 0.16
+            acc=acc+gas./(A2+A3);
+            writePosition(s,0.46−acc)
+          end
+        end
+        pause(0.02);
+        A1 = readVoltage(a,'A1');
+      end
+      if A1 > 2.6
+        writePosition(s,0.42)
+      end
+    end
+    writeDigitalPin(a,'D7',0);
+    writeDigitalPin(a,'D8',1);
+    writePosition(s,0.46)
+    vaning = 1;
+    disp('F rsta V ningen')
+    acc=0;
+    knapp3 = 0;
+    knapp2 = 0;
+    knapp1 = 0;
+    knapp4 = 0;
+    knapp5 = 0;
+  end
+
+  if knapp2 == 1 && vaning ~= 2 %f rsta v ningen
+    readVoltage(a,'A2')
+    while A2 < 3.1
+      A2 = readVoltage(a,'A2');
+      if vaning == 3 || vaning == 0
+        A1 = readVoltage(a,'A1');
+        A3 = readVoltage(a,'A3');
+        writeDigitalPin(a,'D7',1);
+        writeDigitalPin(a,'D8',0);
+        for gas = linspace(0.1,1)
+        while acc < 0.16
+          acc=acc+gas./(A1+A3);
+          writePosition(s,0.46−acc)
+        end
+      end
+      A2 = readVoltage(a,'A2');
+      if A2 > 2.5
+        writePosition(s,0.42)
+      end
+      elseif vaning == 1
+        A1 = readVoltage(a,'A1');
+        A3 = readVoltage(a,'A3');
+        writeDigitalPin(a,'D7',1);
+        writeDigitalPin(a,'D8',0);
+        for gas = linspace(0.1,1)
+          while acc < 0.16
             acc=acc+gas./(A1+A3);
             writePosition(s,0.46+acc)
           end
